@@ -10,7 +10,8 @@
     <!-- uzvicnici sluze ako u tekstu ima html koda da se prepozna -->
     <!-- prvi parametar je metoda, drugi parametar je akcija(sta da uradi) -->
     <!-- POST metoda stvara novi zapis -->
-    {!! Form::open(['method' => 'POST', 'action' => 'BlogController@store']) !!}
+    <!-- 'files' => true  -  znaci da cemo ovom formom prenositi i fajlove -->
+    {!! Form::open(['method' => 'POST', 'action' => 'BlogController@store', 'files' => true]) !!}
 
       <div class="form-group">
         <!-- tip polja, koje polje, ono sto mi vidimo -->
@@ -21,6 +22,11 @@
       <div class="form-group">
         {!! Form::label("body", "Body") !!}
         {!! Form::textarea("body", null, ['class' => 'form-control']) !!}
+      </div>
+
+      <div class="form-group">
+        {!! Form::label("photo_id", "Fotografija:") !!}
+        {!! Form::file("photo_id", null, ['class' => 'form-control']) !!}
       </div>
 
       <div class="form-group">
