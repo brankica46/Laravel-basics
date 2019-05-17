@@ -18,7 +18,10 @@
             <div class="col-md-12 blog-div">
               <div class="row">
               <div class="col-md-4 inline">
-                <img src="/pictures/slike grada/IMG_0029.JPG" />
+
+
+                <img class="img-responsive image-blog-thumb" src="/pictures/{{$list->photo ? $list->photo->photo : ''}}"/>
+                
               </div>
 
               <div class="col-md-8 inline blog-text">

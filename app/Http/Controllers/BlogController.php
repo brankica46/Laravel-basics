@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Blog;
+use App\Photo;
+use Carbon\Carbon;
 
 class BlogController extends Controller
 {
@@ -41,14 +43,28 @@ class BlogController extends Controller
     {
         $rules = [
           'title' => ['required', 'min:5', 'max: 200'],
-          'body' => ['required', 'min:20']
+          'body' => ['required', 'min:20'],
+          // mimes - dozvoljeni formati
+          'photo_id' => ['mimes:jpeg, jpg, png', 'max:10000']
+        ];
+        $message = [
+          'photo_id.mimes' => 'Ekstenzija mora biti jpg, jpeg ili png!',
+          'photo_id.max' => 'Vasa fotografija mora biti manja od 1MB'
         ];
         // prvi parametar su podaci koje dobijamo POST metodom, u ovom slucaju title i body
         // drugi parametar govori da se na prvi parametar primena iskucana pravila
-        $this->validate($request, $rules);
+        $this->validate($request, $rules, $message);
 
         // sve podatke koje smo dobili POST metodom stavi u promenljivu $input
         $input = $request->all();
+
+        if ($file = $request->file('photo_id')) {
+          // ime ce dobiti vrednost vremena
+          $name = Carbon::now(). '.' .$file->getClientOriginalName();
+          $file->move('pictures', $name);
+          $photo = Photo::create(['photo' => $name, 'title' => $name]);
+          $input['photo_id'] = $photo->id;
+        }
 
         // idi u Blog bazu i u njoj kreiraj novi red
         $blog = Blog::create($input);
