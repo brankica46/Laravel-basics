@@ -30,7 +30,7 @@
       </div>
 
       <div class="form-group">
-        {!! Form::submit("Posalji formu", ['class' => 'btn btn-success']) !!}
+        {!! Form::submit("Dodaj blog", ['class' => 'btn btn-success']) !!}
       </div>
     {!! Form::close() !!}
   </div>

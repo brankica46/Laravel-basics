@@ -21,11 +21,11 @@
 
 
                 <img class="img-responsive image-blog-thumb" src="/pictures/{{$list->photo ? $list->photo->photo : ''}}"/>
-                
+
               </div>
 
               <div class="col-md-8 inline blog-text">
-                <h1>{{$list->title}}</h1>
+                <h1><a href="{{action('ListController@show', [$list->slug])}}">{{$list->title}}</a></h1>
                 <p>
                   {{ str_limit($list->body, 400) }}
                 </p>

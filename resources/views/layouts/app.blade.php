@@ -45,6 +45,9 @@
                       <li class="nav-item">
                           <a class="nav-link" href="kontakt">Kontakt</a>
                       </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="blogs">Blogs</a>
+                      </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

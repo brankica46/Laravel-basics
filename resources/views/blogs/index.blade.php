@@ -13,7 +13,7 @@
   <table class="table table-bordered">
     <thead class="thead-light">
       <tr>
-       <th>ID</th>
+       <th>Slug</th>
        <th>Title</th>
        <th>Body</th>
        <th>Edit</th>
@@ -23,7 +23,7 @@
     <tbody>
       @foreach ($blogs as $blog)
        <tr>
-         <th>{{$blog->id}}</th>
+         <th>{{$blog->slug}}</th>
          <td>{{$blog->title}}</td>
          <td>{{ str_limit($blog->body, 50) }}</td>
          <td>
@@ -31,7 +31,7 @@
            <a href="{{ action('BlogController@edit', [$blog->id]) }}" class="btn btn-secondary">Edit</a>
          </td>
          <td>
-           {!! Form::open(['method' => 'DELETE', 'action' => ['BlogController@destroy', $blog->id]]) !!}
+           {!! Form::open(['method' => 'DELETE', 'action' => ['BlogController@destroy', $blog->slug]]) !!}
             <div class="form-group">
               {!! Form::submit("Delete", ['class' => 'btn btn-danger']) !!}
             </div>

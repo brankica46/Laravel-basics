@@ -58,6 +58,8 @@ class BlogController extends Controller
         // sve podatke koje smo dobili POST metodom stavi u promenljivu $input
         $input = $request->all();
 
+        $input['slug'] = str_slug($request->title);
+
         if ($file = $request->file('photo_id')) {
           // ime ce dobiti vrednost vremena
           $name = Carbon::now(). '.' .$file->getClientOriginalName();
@@ -81,7 +83,8 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        //
+        // $blog = Blog::findOrFail($id);
+        // return view('blogs.show', compact('blog'));
     }
 
     /**
@@ -90,9 +93,9 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        $blog = Blog::findOrFail($id);
+        $blog = Blog::whereSlug($slug)->first();
         //dd($blog);
         //vrati edit view, blog u zagradi je $blog
         return view('blogs.edit', compact('blog'));
@@ -105,11 +108,11 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
         // pravi input promenjivu i salje zahtev za sve podatke
         $input = $request->all();
-        $blog = Blog::findOrFail($id);
+        $blog = Blog::findOrFail($slug);
 
         // input podatke kopira preko starih podataka
         $blog->update($input);

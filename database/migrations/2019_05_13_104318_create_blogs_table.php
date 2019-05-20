@@ -16,6 +16,7 @@ class CreateBlogsTable extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
+            $table->string('slug');
             $table->text('body');
             // _>nullable() - ako se ne popuni polje, bice nula
             $table->integer('photo_id')->nullable();
