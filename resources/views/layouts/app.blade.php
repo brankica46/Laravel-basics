@@ -37,16 +37,18 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                       <li class="nav-item">
-                          <a class="nav-link" href="onama">O nama</a>
+                          <a class="nav-link" href="../onama">O nama</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="galerija">Galerija</a>
+                          <a class="nav-link" href="../galerija">Galerija</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="kontakt">Kontakt</a>
+                          <a class="nav-link" href="../kontakt">Kontakt</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="blogs">Blogs</a>
+                          <a class="nav-link" href="../blogs">Blogs</a>
+                      </li>
+                          <a class="nav-link" href="{{url('contact')}}">Contact</a>
                       </li>
                     </ul>
 

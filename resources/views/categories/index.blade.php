@@ -3,9 +3,9 @@
 @section('sadrzaj')
 
 <div class="card">
-  <div class="card-header">Blog
-    <a href="{{ asset('blogs/create') }}">
-      <button type="button" class="btn btn-primary" style="margin-left:20px;">Dodaj blog</button>
+  <div class="card-header">Kategorija
+    <a href="{{ asset('categories/create') }}">
+      <button type="button" class="btn btn-primary" style="margin-left:20px;">Dodaj kategoriju</button>
    </a>
   </div>
   <div class="card-body">
@@ -15,25 +15,21 @@
       <tr>
        <th>ID</th>
        <th>Title</th>
-       <th>Image</th>
-       <th>Body</th>
        <th>Edit</th>
        <th>Delete</th>
      </tr>
     </thead>
     <tbody>
-      @foreach ($blogs as $blog)
+      @foreach ($categories as $category)
        <tr>
-         <th>{{$blog->id}}</th>
-         <td>{{$blog->title}}</td>
-         <td><img class="img-responsive" src="/pictures/{{$blog->photo ? $blog->photo->photo : ''}}"/ style="height:100px;"></td>
-         <td>{{ str_limit($blog->body, 50) }}</td>
+         <th>{{$category->id}}</th>
+         <td>{{$category->title}}</td>
          <td>
            <!-- prvi parametar je akcija, drugi parametar je da nam daje odgovorajuci id -->
-           <a href="{{ action('BlogController@edit', [$blog->id]) }}" class="btn btn-secondary">Edit</a>
+           <a href="{{ action('CategoryController@edit', [$category->id]) }}" class="btn btn-secondary">Edit</a>
          </td>
          <td>
-           {!! Form::open(['method' => 'DELETE', 'action' => ['BlogController@destroy', $blog->id]]) !!}
+           {!! Form::open(['method' => 'DELETE', 'action' => ['CategoryController@destroy', $category->id]]) !!}
             <div class="form-group">
               {!! Form::submit("Delete", ['class' => 'btn btn-danger']) !!}
             </div>

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Blog;
+use App\Category;
 
-class ListController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,8 @@ class ListController extends Controller
      */
     public function index()
     {
-      $lists = Blog::latest()->paginate(3);
-
-      //dd($lists);
-      return view('welcome', compact('lists'));
+        $categories = Category::all();
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -27,7 +25,7 @@ class ListController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -38,7 +36,19 @@ class ListController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+          'title' => ['required', 'min:5', 'max:200']
+        ];
+
+        $this->validate($request, $rules);
+
+        $input = $request->all();
+
+        $input['slug'] = str_slug($request->title);
+
+        $category = Category::create($input);
+
+        return redirect('categories');
     }
 
     /**
@@ -49,8 +59,7 @@ class ListController extends Controller
      */
     public function show($id)
     {
-      $list = Blog::findOrFail($id)->first();
-      return view('blogs.show', compact('list'));
+        //
     }
 
     /**
@@ -61,7 +70,8 @@ class ListController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -73,7 +83,12 @@ class ListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $category = Category::findOrFail($id);
+
+        $category->update($input);
+
+        return redirect('categories');
     }
 
     /**
@@ -84,6 +99,9 @@ class ListController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return redirect('categories');
     }
 }

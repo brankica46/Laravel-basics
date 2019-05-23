@@ -15,6 +15,9 @@
                       <li class="nav-item">
                         <a class="nav-link" href="{{ asset('posts') }}">Post</a>
                       </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ asset('categories') }}">Categories</a>
+                      </li>
                     </ul>
                 </div>
             </div>

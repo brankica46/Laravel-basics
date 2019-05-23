@@ -93,9 +93,9 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($slug)
+    public function edit($id)
     {
-        $blog = Blog::whereSlug($slug)->first();
+        $blog = Blog::findOrFail($id)->first();
         //dd($blog);
         //vrati edit view, blog u zagradi je $blog
         return view('blogs.edit', compact('blog'));
@@ -108,11 +108,11 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $slug)
+    public function update(Request $request, $id)
     {
         // pravi input promenjivu i salje zahtev za sve podatke
         $input = $request->all();
-        $blog = Blog::findOrFail($slug);
+        $blog = Blog::findOrFail($id);
 
         // input podatke kopira preko starih podataka
         $blog->update($input);

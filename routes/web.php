@@ -27,25 +27,26 @@ Route::get('kontakt', function () {
 
 Auth::routes();
 
-View::share('lists', App\Blog::latest()->get());
-
 //ruta sa akcijom
 //kad se klikne na home, idi na kontroler home i idi kroz njega do akcije index
-Route::get('/home', 'HomeController@index');
+
 
 //dodavanje ruta za model Blog
-Route::resource('blogs', 'BlogController');
+
 
 //dodavanje ruta za posts
 Route::resource('posts', 'PostController');
+
+Route::resource('categories', 'CategoryController');
 
 Route::get('/', 'ListController@index');
 Route::resource('/lists', 'ListController');
 
 Route::group(['middleware' => ['auth']], function() {
+  Route::resource('posts', 'PostController');
+  Route::get('/home', 'HomeController@index');
   Route::resource('blogs', 'BlogController');
 });
 
-Route::group(['middleware' => ['auth']], function() {
-  Route::resource('posts', 'PostController');
-});
+Route::get('contact', 'MailController@contact');
+Route::post('contact/send', 'MailController@send');

@@ -25,7 +25,7 @@
               </div>
 
               <div class="col-md-8 inline blog-text">
-                <h1><a href="{{action('ListController@show', [$list->slug])}}">{{$list->title}}</a></h1>
+                <h1><a href="{{action('ListController@show', [$list->id])}}">{{$list->title}}</a></h1>
                 <p>
                   {{ str_limit($list->body, 400) }}
                 </p>
@@ -37,6 +37,7 @@
         </div>
       </div>
       {{ $lists->links() }}
+      <example-component></example-component>
     </div>
   </div>
 </div>
